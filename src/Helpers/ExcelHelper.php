@@ -44,7 +44,8 @@ class ExcelHelper
         }
         $range = $year - $epoch;
         // check leapDay
-        $leap = (new \DateTime($dateInput))->format('L');
+        //$leap = (new \DateTime($dateInput))->format('L'); fix timezone error
+        $leap = \DateTime::createFromFormat("L", $dateInput);
         $mDays = [31, ($leap ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
         if (($year < 1900 || $year > 9999) || ($month < 1 || $month > 12) || $day < 1 || $day > $mDays[$month - 1]) {
